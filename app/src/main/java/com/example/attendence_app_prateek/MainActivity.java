@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private ArrayAdapter arrayAdapter;
     private ListView result;
-    private Button button;
+    private Button scanButton;
     private List<String> names=new ArrayList<>();
     public static final int REQ=100;
     public static final int REQC=200;
@@ -46,9 +46,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
 
-        button=findViewById(R.id.scanButton);
+        scanButton=findViewById(R.id.scanButton);
         result=findViewById(R.id.result);
         arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,names);
         result.setAdapter(arrayAdapter);
@@ -68,16 +67,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_CALENDAR)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA}, REQC);
 
 
-        }
-
-        button.setOnClickListener(new View.OnClickListener() {
+        scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(),ScanActivity.class);
@@ -96,15 +88,15 @@ public class MainActivity extends AppCompatActivity {
                 if(attCheck.contains(t)) {
                     names.add(barcode.displayValue);
                     arrayAdapter.notifyDataSetChanged();
-                    Toast.makeText(getApplicationContext(),"Mareked Attendance",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Mareked Attendance",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"Student not in Database",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Student Not there in the database",Toast.LENGTH_LONG).show();
                 }
 
             }
             else{
-                Toast.makeText(getApplicationContext(),"Failed to get data",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Data not retrived",Toast.LENGTH_LONG).show();
             }
         }
     }

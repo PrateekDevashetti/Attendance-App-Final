@@ -27,7 +27,7 @@ public class ScanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
-        surfaceView=findViewById(R.id.camprview);
+        surfaceView=findViewById(R.id.surfaceView);
         surfaceView.setZOrderMediaOverlay(true);
         surfaceHolder=surfaceView.getHolder();
         barcodeDetector=new BarcodeDetector.Builder(this).setBarcodeFormats(FirebaseVisionBarcode.FORMAT_ALL_FORMATS).build();
